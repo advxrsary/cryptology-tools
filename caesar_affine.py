@@ -1,14 +1,21 @@
 # Sevastian Zare
+# Cryptology Tools
+# Caesar Affine Cipher encryption-decryption tool
 
-# 28 assignment 
-# 1. Decrypt the affine Ceasar cipher:
+# To use this tool, run file named 
 
-# AIMCG BKOLK VBCLA NPIMM CAITI 
-# LKMUK AIMCS JKLBK LCPKP CGBCK 
-# PBOMC KXLLI TPILC GLUXN IPMKL 
-# UIX  
 
-        
+# encryption
+def affine_encrypt(plaintext, a, b):
+    ciphertext = ''
+    for c in plaintext:
+        if c.isalpha():
+            x = ord(c) - ord('A')
+            x = (a * x + b) % 26
+            ciphertext += chr(x + ord('A'))
+        else:
+            ciphertext += c
+    return ciphertext
 
 # manual decryption
 def affine_decrypt(ciphertext, a, b):
