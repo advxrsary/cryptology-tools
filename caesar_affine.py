@@ -6,6 +6,9 @@
 
 
 # encryption
+from dataclasses import replace
+
+
 def affine_encrypt(plaintext, a, b):
     ciphertext = ''
     for c in plaintext:
@@ -20,6 +23,7 @@ def affine_encrypt(plaintext, a, b):
 # manual decryption
 def affine_decrypt(ciphertext, a, b):
     plaintext = ''
+    ciphertext = ciphertext.replace(' ', '')
     for c in ciphertext:
         if c.isalpha():
             x = ord(c) - ord('A')
@@ -30,17 +34,20 @@ def affine_decrypt(ciphertext, a, b):
     return plaintext
 
 # automatic decryption with brute force and filter
-def calc_keys(ciphertext):
+def calc_keys(ciphertext, chars=''):
     for l1 in range(1, 26):
         if 26 % l1 != 0:
             for l2 in range(0, 26):
                 plaintext = affine_decrypt(ciphertext, l1, l2)
-                if plaintext.startswith(''):
+                if plaintext.startswith(chars):
                     print(l1, l2, plaintext)
 
+# manual ciphertext input
 def main():
-    ciphertext = 'ZUIAZHZUSCYQOXEFFICVCPDGEMIBPTEZIMMRQTXMEIYDBEJPBXUOUMZUUYSCEUASTRCCVBQKGBDJZNGAPORZYQSZLUYQ'
+    ciphertext = input('Enter ciphertext (single line): ')
+    chars = input('Enter the first characters of the plaintext (leave empty for all results): ')
     calc_keys(ciphertext)
+    
     
 
 if __name__ == "__main__":
