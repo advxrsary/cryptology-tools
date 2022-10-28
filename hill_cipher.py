@@ -40,14 +40,14 @@ def multiply(inv_key, ciphertext, n):
 
 def main():
     # n
-    n = 26
+    n = input('Enter modulus: ')
 
     # key
-    key = [6, 17, 17, 5]
+    key = input('Enter key: ')
     print("key: ", key)
 
     # ciphertext
-    ciphertext = [25, 20, 8, 0]
+    ciphertext = input('Enter ciphertext: ')
     print("ciphertext: ", ciphertext)
 
     # determinant
