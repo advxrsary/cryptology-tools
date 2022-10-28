@@ -21,60 +21,46 @@
 # python code implementation
 import numpy as np
 
-def det(key, n):
+def det_inv(key, n):
     # key 
     a, b, c, d = key
-    # modulus
-    n = 26
     # determinant
-    dt = 1/(a*d - b*c) % n
-
-    return dt
-
-def calc_inverse(dt, key, n):
-    # inverse of key
-    inv = [dt * key[3], -dt * key[1], -dt * key[2], dt * key[0]]
-    return inv
+    dt = 1/(a*d - c*b) % n
+    inverse = dt*d%n, -dt*b%n, -dt*c%n, dt*a%n
+    return dt, inverse
 
 def multiply(inv_key, ciphertext, n):
     # key
     a, b, c, d = inv_key
     # ciphertext
     w, x, y, z = ciphertext
-
-    # modulus
-    n = 26
-
     # plaintext
-    q = (a*x + b*y) % n
-    r = (c*x + d*y) % n
-    s = (a*z + b*w) % n
-    t = (c*z + d*w) % n
-
-    return q, r, s, t
+    p = [a*w + b*x % n, c*w + d*x % n, a*y + b*z % n, c*y + d*z % n]
+    return p
 
 def main():
+    # n
+    n = 26
+
     # key
     key = [6, 17, 17, 5]
     print("key: ", key)
 
-    # determinant
-    dt = det(key, 26)
-    print("det: ", dt)
-
-    # inverse of key
-    inv = calc_inverse(dt, key, 26)
-    print("inverse: ", inv)
-
-    # ciphertext first 4 letters
-    # ZUIAZHZUSCYQOXEFFICVCPDGEMIBPTEZIMMRQTXMEIYDBEJPBXUOUMZUUYSCEUASTRCCVBQKGBDJZNGAPORZYQSZLUYQ
+    # ciphertext
     ciphertext = [25, 20, 8, 0]
     print("ciphertext: ", ciphertext)
 
+    # determinant
+    dt, inv_key = det_inv(key, n)
+    print("determinant: ", dt)
+    print("inverse key: ", inv_key)
+    
     # plaintext
-    plaintext = multiply(inv, ciphertext, 26)
+    plaintext = multiply(inv_key, ciphertext, n)
     print("plaintext: ", plaintext)
+
 
 if __name__ == "__main__":
     main()
+
 
