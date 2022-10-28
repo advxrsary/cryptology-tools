@@ -17,72 +17,43 @@
 # python code implementation
 import numpy as np
 
-# convert ciphertext to numbers
-def cipher_alphabet2num(numcipher):
+alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+# convert ciphertext to alphabet numbers
+def cipher_alphabet2num(cipher):
     alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    numcipher = numcipher.replace(' ', '')
-    numcipher = numcipher.upper()
-    numcipher = [alphabet.index(c) for c in numcipher]
-    return numcipher
+    cipher = cipher.upper()
+    cipher = [alphabet.index(c) for c in cipher]
+    return cipher
 
 
-# determinant
-def det(key, n):
-    # key
-    a, b, c, d = key
-    # determinant
-    dt = 1/(a*d - c*b) % n
-    inverse = dt*d % n, -dt*b % n, -dt*c % n, dt*a % n
-    return dt, inverse
-
-
-def multiply(inv_key, ciphertext, n):
-    # key
-    a, b, c, d = inv_key
-    # ciphertext
-    w, x, y, z = ciphertext
-    # plaintext
-    p = [a*w + b*x % n, c*w + d*x % n, a*y + b*z % n, c*y + d*z % n]
-    return p
+# convert numbers to vectors
+def numcipher2vector(cipher, n):
+    cipher = np.reshape(cipher, (-1, n))
+    cipher = cipher.transpose()
+    return cipher
 
 
 def main():
-    # n
-    n = input('Enter modulus: ')
+    ciphertext = 'ZUIAZHZUSCYQOXEFFICVCPDGEMIBPTEZIMMRQTXMEIYDBEJPBXUOUMZUUYSCEUASTRCCVBQKGBDJZNGAPORZYQSZLUYQ'
 
-    # key
-    key = input('Enter key (split by commas): ')
-    key = key.replace('[', '')
-    key = key.replace(']', '')
-    key = key.replace(' ', '')
-    key = key.split(',')
+    # key matrix, 2x2
+    key = np.array([[6, 17], [17, 5]])
+    inv = np.linalg.inv(key)
+    n = 2
 
-    
+    cipher = cipher_alphabet2num(ciphertext)
+    cipher = numcipher2vector(cipher, n)
 
-    # ciphertext
-    ciphertext = input('Enter ciphertext: ')
-    ciphertext = ciphertext.replace(' ', '')
-    ciphertext = ciphertext.upper()
+    # multiply inverse of key matrix with ciphertext, mod 26
+    plaintext = np.matmul(inv, cipher)
+    plaintext = plaintext % 26
 
-
-    # convert ciphertext to numbers
-    numcipher = cipher_alphabet2num(ciphertext)
-
-    # convert numbers to vector
-    vector = numcipher2vector(numcipher)
-
-    # determinant
-    dt, inv_key = det_inv(key, n)
-
-    # plaintext
-    plaintext = multiply(inv_key, ciphertext, n)
-    print("ciphertext: ", str(ciphertext))
-    print("key: ", key, '\n')
-    print("numcipher: ", str(numcipher))
-    print("vector: ", str(vector), '\n')
-    print("determinant: ", dt)
-    print("inverse key: ", inv_key, '\n')
-    print("plaintext: ", plaintext)
+    # convert numbers to alphabet
+    plaintext = plaintext.flatten()
+    plaintext = [alphabet[int(i)] for i in plaintext]
+    plaintext = ''.join(plaintext)
+    print(plaintext)
 
 
 if __name__ == "__main__":

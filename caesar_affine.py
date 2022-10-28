@@ -4,7 +4,6 @@
 
 # To use this tool, run file named tools.py
 
-from dataclasses import replace
 
 # encryption
 def affine_encrypt(plaintext, a, b):
@@ -45,7 +44,7 @@ def main():
     ciphertext = input('Enter ciphertext (single line): ')
     chars = input(
         'Enter the first characters of the plaintext (leave empty for all results): ')
-    calc_keys(ciphertext)
+    calc_keys(ciphertext, chars)
 
 
 if __name__ == "__main__":
