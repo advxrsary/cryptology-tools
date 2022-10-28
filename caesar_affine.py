@@ -4,11 +4,9 @@
 
 # To use this tool, run file named tools.py
 
-
-# encryption
 from dataclasses import replace
 
-
+# encryption
 def affine_encrypt(plaintext, a, b):
     ciphertext = ''
     for c in plaintext:
@@ -45,10 +43,10 @@ def calc_keys(ciphertext, chars=''):
 # manual ciphertext input
 def main():
     ciphertext = input('Enter ciphertext (single line): ')
-    chars = input('Enter the first characters of the plaintext (leave empty for all results): ')
+    chars = input(
+        'Enter the first characters of the plaintext (leave empty for all results): ')
     calc_keys(ciphertext)
-    
-    
+
 
 if __name__ == "__main__":
     main()
