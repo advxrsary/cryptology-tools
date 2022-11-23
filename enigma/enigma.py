@@ -1,24 +1,3 @@
-# Sevastian Zare
-# Cryptology Tools
-# Enigma decryption tool
-
-# Mathematical equation of Enigma with two rotors
-
-# Plaintext = t0 t1 t2..., tk,
-# Ciphertext = c0 c1 c2..., ck,
-# k = m1 + nm2 +...
-# ck = ρ^(−m2)λ2ρ^(m2)ρ^(−m1)λ1ρ^(m1)(tk),
-# tk = ρ^(−m1)λ^(-1)ρ^(m1)ρ^(−m2)λ^(−1)ρ^(m2)(ck) 12
-
-# Full Enigma
-# Plaintext = t0 t1 t2..., tk,
-# k = m1 + m2n + m3n^2 +...
-# α(m,λ) = ρ^(−m)*λρ^m
-# α^(−1)(m,λ) = ρ^m*λ^(−1)*ρ−m
-# σ = σ^(−1)
-# ck = σ^(−1)α^(−1)(m1,λ1) α^(−1)(m2,λ2)α^(−1)(m3,λ3)π ← α(m3,λ3)α(m2,λ2)α(m1,λ1)σ(tk)
-# tk = σ^(−1)α^(−1)(m1,λ1)α^(−1)(m2,λ2)α^(−1)(m3,λ3)π ← α(m3,λ3)α(m2,λ2)α(m1,λ1)σ(ck)
-
 alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 def numerify(text):
