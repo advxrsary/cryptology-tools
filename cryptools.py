@@ -6,10 +6,14 @@
 
 # This is a file that runs all the tools.
 
-import caesar
-import enigma
-import feistel
-import hill
+import sys
+import os
+sys.path.insert(0, os.getcwd())
+
+from feistel import feistel
+from caesar import affine
+from hill import hill
+from enigma import enigma
 
 def main():
     print('''
@@ -24,13 +28,13 @@ def main():
     ''')
     choice = int(input('Enter your choice: '))
     if choice == 1:
-        caesar.caesar.main()
+        affine.main()
     elif choice == 2:
-        hill.hill()
+        hill.main()
     elif choice == 3:
         feistel.main()
     elif choice == 4:
-        enigma.enigma()
+        enigma.main()
     else:
         print('Invalid choice!')
 
