@@ -1,11 +1,4 @@
-# Sevastian Zare
-# Cryptology Tools
-# Caesar Affine Cipher encryption-decryption tool
-
-# To use this tool, run file named tools.py
-
-
-# encryption
+# decryption
 def affine_encrypt(plaintext, a, b):
     ciphertext = ''
     for c in plaintext:
