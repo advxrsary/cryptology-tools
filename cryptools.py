@@ -10,8 +10,8 @@ import sys
 import os
 sys.path.insert(0, os.getcwd())
 
-from feistel import feistel
-from caesar import affine
+from feistel import ebc
+from affine import affine
 from hill import hill
 from enigma import enigma
 
@@ -28,17 +28,17 @@ def main():
     ''')
     choice = int(input('Enter your choice: '))
     if choice == 1:
-        caesar_affine()
+        decrypt_affine()
     elif choice == 2:
         hill.main()
     elif choice == 3:
-        feistel.main()
+        ebc.main()
     elif choice == 4:
         enigma.main()
     else:
         print('Invalid choice!')
 
-def caesar_affine():
+def decrypt_affine():
     ciphertext = input('Enter ciphertext (single line): ')
     chars = input(
         'Enter the first characters of the plaintext (leave empty for all results): ')
