@@ -29,7 +29,7 @@ def calc_keys(ciphertext, chars=''):
         if 26 % l1 != 0:
             for l2 in range(0, 26):
                 plaintext = affine_decrypt(ciphertext, l1, l2)
-                if plaintext.startswith(chars):
+                if plaintext.startswith(chars.upper()):
                     print(l1, l2, plaintext)
 
 # manual ciphertext input

@@ -28,7 +28,7 @@ def main():
     ''')
     choice = int(input('Enter your choice: '))
     if choice == 1:
-        affine.main()
+        caesar_affine()
     elif choice == 2:
         hill.main()
     elif choice == 3:
@@ -37,6 +37,12 @@ def main():
         enigma.main()
     else:
         print('Invalid choice!')
+
+def caesar_affine():
+    ciphertext = input('Enter ciphertext (single line): ')
+    chars = input(
+        'Enter the first characters of the plaintext (leave empty for all results): ')
+    affine.calc_keys(ciphertext, chars)
 
 if __name__ == "__main__":
     main()
